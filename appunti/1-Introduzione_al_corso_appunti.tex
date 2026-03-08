@@ -1,0 +1,232 @@
+\documentclass[a4paper,12pt]{article}
+
+% Pacchetti per la lingua e la codifica
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+
+% Pacchetti per la formattazione e il layout
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\usepackage{microtype}
+\usepackage{parskip} % Spaziatura tra i paragrafi
+\usepackage{setspace}
+\onehalfspacing
+
+% Pacchetti per elementi grafici e matematici
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+% Configurazione dei link
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Appunti Cybersecurity - Introduzione},
+    pdfpagemode=FullScreen,
+}
+
+% Definizione di un box per le definizioni importanti
+\newtcolorbox{definizione}[1]{
+  colback=blue!5!white,
+  colframe=blue!75!black,
+  title={\textbf{#1}}
+}
+
+% Definizione di un box per le formule (come richiesto)
+\newtcolorbox{formula}{
+  colback=white,
+  colframe=black,
+  sharp corners,
+  boxrule=1pt
+}
+
+% Titolo del documento
+\title{\textbf{Introduzione alla Cybersecurity}\\
+\large Appunti del corso basati sulle slide ufficiali}
+\author{Prof. Francesco Palmieri}
+\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Panoramica del Corso}
+
+Lo scopo principale del corso è costruire un ecosistema di competenze adeguate per gestire strumenti e architetture a supporto della sicurezza informatica. Verranno chiariti i concetti fondamentali, analizzate le potenziali minacce e studiate le tecnologie disponibili per fronteggiarle.
+
+Il corso si articola in:
+\begin{itemize}
+    \item \textbf{Lezioni frontali:} 7 CFU (56 ore)
+    \item \textbf{Laboratorio:} 2 CFU (16 ore)
+\end{itemize}
+
+L'esame consiste in un colloquio individuale. I prerequisiti fondamentali includono i fondamenti di sicurezza, reti di calcolatori e familiarità con i sistemi Unix/Linux.
+
+\section{Etica e Legalità}
+
+Durante il corso verranno discussi e simulati diversi tipi di attacchi, utilizzando tecnologie di intercettazione e scansione delle vulnerabilità. È fondamentale comprendere il confine etico e legale di tali attività.
+
+\begin{definizione}{Regola Fondamentale}
+Nessuna tecnica o strumento appreso deve essere utilizzato su reti reali senza il consenso informato di tutte le parti coinvolte. L'esistenza di vulnerabilità non giustifica accessi non autorizzati.
+\end{definizione}
+
+L'obiettivo è formare professionisti (\textit{White Hat}) in grado di difendere le infrastrutture, e non attaccanti (\textit{Black Hat}) che ne violano l'integrità. Il mancato rispetto delle norme può portare a gravi conseguenze legali.
+
+\section{Definizioni Fondamentali}
+
+\subsection{Cyberspazio e Cybersecurity}
+
+Il \textbf{cyberspazio} è definito come l'insieme dei sistemi informatici e delle reti di interconnessione. È un'opera estremamente complessa, costituita da milioni di reti, stratificazioni di software e dispositivi eterogenei. Questa complessità intrinseca genera vulnerabilità che possono essere sfruttate per lanciare attacchi, con conseguenze sia nel mondo digitale che in quello reale.
+
+\begin{definizione}{Cybersecurity}
+La Cybersecurity è la sicurezza dei sistemi informatici e delle reti di interconnessione, con lo scopo di proteggerne l'operatività e gli asset strategici in caso di attacchi, incidenti o guasti, garantendo disponibilità, affidabilità, integrità e riservatezza.
+\end{definizione}
+
+\subsection{I tre pilastri della Cybersecurity (CIA Triad)}
+
+La sicurezza informatica si fonda su tre concetti chiave:
+
+\begin{enumerate}
+    \item \textbf{Riservatezza (Confidenzialità):} Garantire che informazioni e risorse siano accessibili solo a soggetti autorizzati. Riguarda la protezione dei contenuti, la privacy degli individui e la segretezza delle organizzazioni.
+    \item \textbf{Integrità:} Garantire che le informazioni non siano state modificate, manipolate o distrutte in modo non autorizzato. Si distingue in:
+    \begin{itemize}
+        \item \textit{Integrità dei dati:} le informazioni vengono modificate solo in modo autorizzato.
+        \item \textit{Integrità del sistema:} il sistema opera libero da manipolazioni esterne.
+    \end{itemize}
+    \item \textbf{Disponibilità:} Assicurare che gli utenti legittimi abbiano sempre accesso alle risorse quando necessario. 
+\end{enumerate}
+
+Matematicamente, per la disponibilità si desidera che:
+
+\begin{formula}
+\[
+\lim_{t \to \infty} D(t) = 1
+\]
+\end{formula}
+\textit{Dove $D(t)$ è la probabilità che il sistema funzioni correttamente all'istante $t$.}
+
+\subsection{Concetti correlati}
+
+Oltre ai tre pilastri, vi sono altre proprietà essenziali:
+\begin{itemize}
+    \item \textbf{Autenticità:} Certezza che un dato provenga da una specifica sorgente.
+    \item \textbf{Non ripudiabilità:} Impossibilità per un soggetto di negare di aver compiuto una determinata azione (es. invio di un messaggio).
+    \item \textbf{Resilienza:} Capacità di un sistema di operare anche in condizioni degradate e di recuperare l'operatività in tempi accettabili dopo un incidente.
+\end{itemize}
+
+\section{Safety, Security e Dependability}
+
+È importante distinguere tra concetti spesso confusi:
+
+\begin{itemize}
+    \item \textbf{Safety:} Capacità di un sistema di funzionare senza provocare danni alle persone o all'ambiente (es. sensori che aprono le porte di un'auto in caso di incidente).
+    \item \textbf{Security:} Protezione delle risorse informatiche da accessi non autorizzati o danni intenzionali (es. evitare che qualcuno apra le porte dell'auto saltando sul tetto, sfruttando il sensore di safety).
+    \item \textbf{Dependability (Affidabilità):} Proprietà che permette di fare assoluto affidamento sul servizio fornito.
+\end{itemize}
+
+La \textbf{Dependability} si analizza attraverso tre componenti:
+\begin{enumerate}
+    \item \textbf{Minacce:} Circostanze che portano alla perdita di affidabilità.
+    \item \textbf{Attributi:} Proprietà per valutare la qualità del servizio.
+    \item \textbf{Strumenti:} Metodi tecnici per garantire il servizio.
+\end{enumerate}
+
+\section{Il contesto Internet e le sue debolezze}
+
+Internet è diventata un'infrastruttura critica per la società (e-commerce, e-health, servizi pubblici), ma il suo modello di sicurezza è rimasto quello degli anni '70. 
+Le principali debolezze strutturali includono:
+\begin{itemize}
+    \item Assenza di un'autorità centrale di controllo.
+    \item Impossibilità di un tracciamento sistematico delle connessioni.
+    \item Perimetri di rete "porosi" o assenti ("borderless"), specialmente con il wireless.
+    \item Tecnologie non nate per transazioni \textit{mission-critical}.
+\end{itemize}
+
+Inoltre, le \textbf{bad practices} degli utenti (password deboli, disattivazione antivirus, phishing) rendono la sicurezza vulnerabile nel suo "anello più debole". L'approccio della "sicurezza personale" (proteggo solo il mio PC) è fallimentare: la sicurezza in rete richiede cooperazione e interscambio di informazioni.
+
+\section{Nuovi Scenari di Minaccia: IoT e Cyber-Fisico}
+
+L'espansione della rete ha portato all'\textbf{Internet of Things (IoT)}. Si stima che entro pochi anni ci saranno 50 miliardi di dispositivi connessi.
+
+\subsection{Cyber-Physical Systems}
+Le minacce non riguardano più solo i dati, ma anche il mondo fisico (Safety). Esempi critici includono:
+\begin{itemize}
+    \item \textbf{Dispositivi medici:} Pacemaker e defibrillatori vulnerabili (es. caso Abbott 2017).
+    \item \textbf{Veicoli e trasporti:} Controllo remoto non autorizzato di automobili o gru industriali.
+    \item \textbf{Domotica:} Termostati e videocamere accessibili pubblicamente.
+\end{itemize}
+Motori di ricerca come \textbf{Shodan} permettono di individuare facilmente dispositivi IoT vulnerabili connessi in rete.
+
+\section{Tipologie e Motivazioni degli Attacchi}
+
+Gli attacchi si sono evoluti da semplici dimostrazioni di abilità a vere e proprie industrie criminali. 
+
+\subsection{Motivazioni}
+\begin{itemize}
+    \item \textbf{Guadagno economico:} Furto di dati bancari, ransomware, truffe.
+    \item \textbf{Spionaggio:} Furto di proprietà intellettuale o segreti di stato.
+    \item \textbf{Vendetta o Attivismo (Hacktivism):} Attacchi ideologici.
+    \item \textbf{Cyber Warfare:} Conflitti tra nazioni.
+\end{itemize}
+
+\subsection{Vettori di attacco comuni}
+Il flusso operativo tipico include:
+\begin{enumerate}
+    \item \textbf{Malware e Phishing:} Per ottenere l'accesso iniziale.
+    \item \textbf{Botnet:} Creazione di reti di dispositivi "zombie".
+    \item \textbf{DDoS (Distributed Denial of Service):} Per inibire i servizi.
+    \item \textbf{Esfiltrazione dati:} Furto di database e credenziali.
+\end{enumerate}
+
+\section{Infrastrutture Critiche}
+
+Le infrastrutture critiche (energia, trasporti, finanza) dipendono dai sistemi informatici e sono bersagli primari.
+
+\subsection{Smart Grids (Rete Elettrica)}
+Le reti elettriche moderne integrano flussi di energia e informazioni. Utilizzano sistemi SCADA spesso obsoleti e vulnerabili. Un attacco può causare blackout su vasta scala o danni fisici alle apparecchiature.
+
+\subsection{Controllo del Traffico Aereo (ATC)}
+Dipende da comunicazioni radio e dati radar. Rischi includono:
+\begin{itemize}
+    \item \textbf{Transponder Spoofing:} Creazione di aerei "fantasma".
+    \item \textbf{Radar Jamming:} Accecamento dei radar.
+\end{itemize}
+
+\subsection{GPS (Global Positioning System)}
+Fondamentale per la navigazione e il timing delle reti. È vulnerabile a:
+\begin{itemize}
+    \item \textbf{Jamming:} Disturbo del segnale per impedirne la ricezione.
+    \item \textbf{Spoofing:} Invio di falsi segnali per alterare la posizione percepita (facilitato oggi da dispositivi \textit{Software Defined Radio} a basso costo).
+\end{itemize}
+
+\section{Cyber Warfare e Terrorismo}
+
+Il cyberspazio è diventato il quinto dominio bellico (dopo terra, mare, aria e spazio). 
+
+\begin{definizione}{Cyber Warfare}
+Attacchi informatici contro l'integrità o la disponibilità di sistemi critici, tali da costituire una minaccia per la sicurezza nazionale, spesso a supporto di attacchi fisici (cinetici).
+\end{definizione}
+
+Un esempio storico è \textbf{Stuxnet} (2010), un worm progettato per sabotare selettivamente le centrifughe di arricchimento dell'uranio iraniane, modificando la logica dei controllori industriali (PLC) senza causare danni ai computer infettati durante la propagazione.
+
+\section{Conclusioni: La Sfida}
+
+La probabilità di subire un attacco è funzione del numero di utenti, dei confini territoriali, delle problematiche tecniche e della disponibilità di informazioni.
+
+Non esiste una "soluzione definitiva" (silver bullet). La sicurezza è un processo continuo che richiede:
+\begin{itemize}
+    \item Consapevolezza del problema.
+    \item Competenze adeguate.
+    \item Cooperazione tra governi, organizzazioni e utenti.
+    \item Integrazione di tecnologia, fattori economici, influenza sociale e politiche normative.
+\end{itemize}
+
+\end{document}
